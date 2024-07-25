@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { status, error } = useSelector((state) => state.auth);
   const [formData, setFormData] = useState({
     email: "",
     username: "",
@@ -27,6 +28,17 @@ const Login = () => {
       navigate("/products");
     });
   };
+  if (status === 'loading') {
+    return  (
+      <div className="loading-container">
+        <div className="spinner"></div>
+        <div className="loading-text">Loading...</div>
+      </div>
+    );
+  }
+  if (status === 'failed') {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <div className="form-container">
@@ -37,7 +49,7 @@ const Login = () => {
           <input
             type="text"
             name="email"
-            placeholder="Enter your email"
+            placeholder="Enter Email"
             value={formData.email}
             onChange={handleChange}
             required
@@ -45,21 +57,11 @@ const Login = () => {
           <i class="fa-solid fa-envelope"></i>
         </div>
         <div className="form-group">
-          <label>Username:</label>
-          <input
-            type="text"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            required
-          />
-          <i class="fa-solid fa-user"></i>
-        </div>
-        <div className="form-group">
           <label>Password:</label>
           <input
             type="password"
             name="password"
+            placeholder="Enter Password"
             value={formData.password}
             onChange={handleChange}
             required

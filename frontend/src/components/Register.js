@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { status, error } = useSelector((state) => state.auth);
   const [formData, setFormData] = useState({
     email:'',
     username: '',
@@ -26,7 +27,17 @@ console.log("formData",formData)
         navigate('/login');
     });
   };
-
+  if (status === 'loading') {
+    return  (
+      <div className="loading-container">
+        <div className="spinner"></div>
+        <div className="loading-text">Loading...</div>
+      </div>
+    );
+  }
+  if (status === 'failed') {
+    return <div>Error: {error}</div>;
+  }
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit}>

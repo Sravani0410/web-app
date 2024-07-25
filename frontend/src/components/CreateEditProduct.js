@@ -50,7 +50,7 @@ const CreateEditProduct = () => {
     <div className="container-form">
       <div className="form-container">
         <h1 className="form-title">
-          {id ? "Edit Product" : "Add Product"} Product
+          {id ? "Edit" : "Add"} Product
         </h1>
         <form onSubmit={handleSubmit}>
           <div>

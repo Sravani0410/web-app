@@ -38,10 +38,11 @@ const ProductList = () => {
                 </div>
                 <p className="product-price">Price: ${product.price}</p>
                 <p className="product-description">{product.description}</p>
-                    <div className="product-links">
+                  <div className="product-links">
                   <Link to={`/products/${product._id}`} className="view-details">
                     View Details
                   </Link>
+                  <Link to={`/edit/${product._id}`} className="edit">Edit Details</Link>
                 </div>
                   </li>
                 ))}

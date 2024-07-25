@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { createProduct, editProduct } from '../features/products/productSlice';
-import { useNavigate, useParams } from 'react-router-dom';
-
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createProduct, editProduct } from "../features/products/productSlice";
+import { useNavigate, useParams } from "react-router-dom";
+import "./CreateEditProduct.css"
 const CreateEditProduct = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -12,9 +12,9 @@ const CreateEditProduct = () => {
   );
 
   const [formData, setFormData] = useState({
-    name: '',
-    price: '',
-    description: '',
+    name: "",
+    price: "",
+    description: "",
   });
 
   useEffect(() => {
@@ -40,47 +40,54 @@ const CreateEditProduct = () => {
     if (id) {
       dispatch(editProduct({ ...formData, id }));
     } else {
-        console.log("formData",formData)
+      console.log("formData", formData);
       dispatch(createProduct(formData));
     }
-    navigate('/');
+    navigate("/products");
   };
 
   return (
-    <div>
-      <h1>{id ? 'Edit' : 'Create'} Product</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name:</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Price:</label>
-          <input
-            type="number"
-            name="price"
-            value={formData.price}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Description:</label>
-          <textarea
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button type="submit">{id ? 'Edit' : 'Create'} Product</button>
-      </form>
+    <div className="container-form">
+      <div className="form-container">
+        <h1 className="form-title">
+          {id ? "Edit Product" : "Add Product"} Product
+        </h1>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label className="form-label">Name:</label>
+            <input
+              className="form-input"
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label className="form-label">Price:</label>
+            <input
+            className="form-input"
+              type="number"
+              name="price"
+              value={formData.price}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label className="form-label">Description:</label>
+            <textarea
+            className="form-textarea"
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <button type="submit" className="form-button">{id ? "Update Product" : "Add Product"} Product</button>
+        </form>
+      </div>
     </div>
   );
 };

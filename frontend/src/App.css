@@ -74,20 +74,6 @@ nav .main-before-login .main-btn{
   margin-top:10px;
   color:#fff
  }
-/* nav .main-after-login{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-}
- nav .after-login{
-  width:100%;
-  height:20px;
-  display: flex;
-  justify-content: space-between;
-  background: #121010;
-  padding: 0 20px;
- } */
 /* form-css */
 .form-container{
   width:420px;
@@ -96,7 +82,7 @@ nav .main-before-login .main-btn{
   padding: 30px 40px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
-  margin-left:35%;
+  margin-left:3%;
   margin-top:10%
 }
 

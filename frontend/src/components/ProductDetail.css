@@ -1,0 +1,34 @@
+.product-detail-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .product-detail-container h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .product-detail-container p {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    color: #666;
+  }
+  
+  .product-detail-container a {
+    display: inline-block;
+    margin-top: 15px;
+    text-decoration: none;
+    color: #3498db;
+    font-weight: bold;
+  }
+  
+  .product-detail-container a:hover {
+    text-decoration: underline;
+  }
+  

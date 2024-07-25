@@ -3,20 +3,32 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../features/products/productSlice";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
+import Pagination from "./Pagination";
 import "./ProductList.css"
 
 
 const ProductList = () => {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.products.products);
-  const status = useSelector((state) => state.products.status);
+  // const products = useSelector((state) => state.products.products);
+  // const status = useSelector((state) => state.products.status);
+  const { products, totalPages, currentPage, status, error } = useSelector((state) => state.products);
   const localstoragetoken = localStorage.getItem("token");
   useEffect(() => {
     if (status === "idle") {
-      dispatch(fetchProducts());
+      dispatch(fetchProducts({ page: currentPage, limit: 10 }));
     }
   }, [status, dispatch]);
+  const handlePageChange = (page) => {
+    dispatch(fetchProducts({ page, limit: 10 }));
+  };
+  if (status === 'loading') {
+    return <div>Loading...</div>;
+  }
 
+  if (status === 'failed') {
+    return <div>Error: {error}</div>;
+  }
+  console.log("products",products)
   return (
     <>
       <Navbar />
@@ -26,7 +38,7 @@ const ProductList = () => {
           <div className="product-container">
             <div className="product-list-container">
               <ul className="product-list">
-                {products.map((product) => (
+                {products?.map((product) => (
                   <li key={product.id} className="product-item">
                     <img
                   className="product-image"
@@ -50,21 +62,7 @@ const ProductList = () => {
             </div>
           </div>
         )}
-
-        {/* {status === 'loading' ? (
-        <p>Loading...</p>
-      ) : (
-        <ul>
-          {products.map((product) => (
-            <li key={product.id}>
-              <h2>{product.name}</h2>
-              <p>{product.price}</p>
-              <p>{product.description}</p>
-              <Link to={`/products/${product._id}`}>View Details</Link>
-            </li>
-          ))}
-        </ul>
-      )} */}
+         <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />
       </div>
     </>
   );

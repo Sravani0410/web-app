@@ -5,11 +5,22 @@ const router = express.Router();
 
 // Get all products
 router.get('/', async (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+
   try {
-    const products = await Product.find();
-    res.json(products);
+    const count = await Product.countDocuments();
+    const products = await Product.find()
+      .skip((page - 1) * limit)
+      .limit(limit);
+
+    res.json({
+      products,
+      totalPages: Math.ceil(count / limit),
+      currentPage: page,
+    });
   } catch (err) {
-    res.status(500).send('Server error');
+    res.status(500).json({ error: err.message });
   }
 });
 

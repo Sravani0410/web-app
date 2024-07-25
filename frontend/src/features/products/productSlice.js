@@ -7,10 +7,12 @@ const initialState = {
   product: null,
   status: 'idle',
   error: null,
+  totalPages: 1,
+  currentPage: 1,
 };
 
-export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
-  const response = await axios.get('/api/products');
+export const fetchProducts = createAsyncThunk('products/fetchProducts', async ({page,limit}) => {
+  const response = await axios.get(`/api/products?page=${page}&limit=${limit}`);
   return response.data;
 });
 
@@ -57,7 +59,9 @@ const productSlice = createSlice({
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.products = action.payload;
+        state.products = action.payload.products;
+        state.totalPages = action.payload.totalPages;
+        state.currentPage = action.payload.currentPage;
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.status = 'failed';

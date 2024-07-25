@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { loginUser } from '../features/auth/authSlice';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../features/auth/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    email:'',
-    username: '',
-    password: '',
+    email: "",
+    username: "",
+    password: "",
   });
 
   const handleChange = (e) => {
@@ -22,27 +22,29 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("formData",formData)
+    console.log("formData", formData);
     dispatch(loginUser(formData)).then(() => {
-        navigate('/');
+      navigate("/products");
     });
   };
 
   return (
-    <div>
-      <h1>Login</h1>
+    <div className="form-container">
       <form onSubmit={handleSubmit}>
-      <div>
+        <h1>Login</h1>
+        <div className="form-group">
           <label>Email:</label>
           <input
             type="text"
             name="email"
+            placeholder="Enter your email"
             value={formData.email}
             onChange={handleChange}
             required
           />
+          <i class="fa-solid fa-envelope"></i>
         </div>
-        <div>
+        <div className="form-group">
           <label>Username:</label>
           <input
             type="text"
@@ -51,8 +53,9 @@ const Login = () => {
             onChange={handleChange}
             required
           />
+          <i class="fa-solid fa-user"></i>
         </div>
-        <div>
+        <div className="form-group">
           <label>Password:</label>
           <input
             type="password"
@@ -61,8 +64,11 @@ const Login = () => {
             onChange={handleChange}
             required
           />
+          <i class="fa-solid fa-lock"></i>
         </div>
-        <button type="submit">Login</button>
+        <button className="btn" type="submit">
+          Login
+        </button>
       </form>
     </div>
   );

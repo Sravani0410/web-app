@@ -28,10 +28,10 @@ console.log("formData",formData)
   };
 
   return (
-    <div>
-      <h1>Register</h1>
+    <div className="form-container">
       <form onSubmit={handleSubmit}>
-      <div>
+      <h1>Register</h1>
+      <div className='form-group'>
           <label>Email:</label>
           <input
             type="text"
@@ -40,8 +40,9 @@ console.log("formData",formData)
             onChange={handleChange}
             required
           />
+          <i class="fa-solid fa-envelope"></i>
         </div>
-        <div>
+        <div className='form-group'>
           <label>Username:</label>
           <input
             type="text"
@@ -50,8 +51,9 @@ console.log("formData",formData)
             onChange={handleChange}
             required
           />
+          <i class="fa-solid fa-user"></i>
         </div>
-        <div>
+        <div className='form-group'>
           <label>Password:</label>
           <input
             type="password"
@@ -60,8 +62,9 @@ console.log("formData",formData)
             onChange={handleChange}
             required
           />
+          <i class="fa-solid fa-lock"></i>
         </div>
-        <button type="submit">Register</button>
+        <button className='btn' type="submit">Register</button>
       </form>
     </div>
   );

@@ -16,9 +16,10 @@ const localstoragetoken=localStorage.getItem('token')
   }, [status, dispatch]);
 
   return (
-    <div>
-      <h1>Product List</h1>
-      <Navbar/>
+    <>
+      <Navbar />
+      <div className='product-list'>
+      {/* <h1>Product List</h1> */}
       {localstoragetoken&&<ul>
           {products.map((product) => (
             <li key={product.id}>
@@ -43,7 +44,8 @@ const localstoragetoken=localStorage.getItem('token')
           ))}
         </ul>
       )} */}
-    </div>
+      </div>
+    </>
   );
 };
 

@@ -16,17 +16,28 @@ const Navbar = () => {
 
   return (
     <nav>
-      <h1>Product App</h1>
       { localstoragetoken ? (
-        <div>
+        <>
+        <div className='main-before-login'>
+        <h1 className='logo'>Product App</h1> 
+        <div className='main-btn'>
           <button onClick={() => navigate('/create')}>Create</button>
           <button onClick={handleLogout}>Logout</button>
         </div>
+        </div>
+        </>
+        
       ) : (
-        <div>
+       <>
+       <div className='main-before-login'>
+       <h1 className='logo'>Product App</h1> 
+        <div className='main-btn'>
           <button onClick={() => navigate('/login')}>Login</button>
           <button onClick={() => navigate('/register')}>Register</button>
         </div>
+       </div>
+       <h1 className='main-heading'>Please Login or Register</h1>
+       </>
       )}
     </nav>
   );

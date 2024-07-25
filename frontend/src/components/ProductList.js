@@ -15,11 +15,11 @@ const ProductList = () => {
   const localstoragetoken = localStorage.getItem("token");
   useEffect(() => {
     if (status === "idle") {
-      dispatch(fetchProducts({ page: currentPage, limit: 10 }));
+      dispatch(fetchProducts({ page: currentPage, limit: 8 }));
     }
   }, [status, dispatch]);
   const handlePageChange = (page) => {
-    dispatch(fetchProducts({ page, limit: 10 }));
+    dispatch(fetchProducts({ page, limit: 8 }));
   };
   if (status === 'loading') {
     return <div>Loading...</div>;

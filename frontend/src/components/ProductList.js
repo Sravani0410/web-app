@@ -22,7 +22,12 @@ const ProductList = () => {
     dispatch(fetchProducts({ page, limit: 8 }));
   };
   if (status === 'loading') {
-    return <div>Loading...</div>;
+    return  (
+      <div className="loading-container">
+        <div className="spinner"></div>
+        <div className="loading-text">Loading...</div>
+      </div>
+    );
   }
 
   if (status === 'failed') {

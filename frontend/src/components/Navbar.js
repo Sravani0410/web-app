@@ -21,7 +21,7 @@ const Navbar = () => {
         <div className='main-before-login'>
         <h1 className='logo'>Product App</h1> 
         <div className='main-btn'>
-          <button onClick={() => navigate('/create')}>Create</button>
+          <button onClick={() => navigate('/create')}>Add Product</button>
           <button onClick={handleLogout}>Logout</button>
         </div>
         </div>

@@ -17,7 +17,10 @@ const ProductDetail = () => {
   return (
     <div className="product-detail">
       {status === "loading" ? (
-        <p>Loading...</p>
+        <div className="loading-container">
+        <div className="spinner"></div>
+        <div className="loading-text">Loading...</div>
+      </div>
       ) : (
         product && (
           <>

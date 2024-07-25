@@ -62,7 +62,7 @@ nav .main-before-login .main-btn{
  nav .main-before-login .main-btn button{
   width:40%;
   height:45px;
-  background: #d03535;
+  background: #1140d9;
   border:none;
   outline: none;
   border-radius: 20px;
@@ -143,13 +143,18 @@ nav .main-before-login .main-btn{
   font-weight: 600;
 }
 
-.product-list-container{
-  /* width:100%; */
-  /* display: flex; */
-  /* flex-wrap: wrap; */
-  /* padding: 0 20px; */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-.product-list-container h1{
-   /* align-items: center; */
+.spinner {
+  border: 8px solid rgba(0, 0, 0, 0.1);
+  border-top: 8px solid #3498db;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
 }

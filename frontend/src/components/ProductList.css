@@ -138,6 +138,7 @@
   .edit:active {
     box-shadow: 0 0.3em 1em -0.5em #69656598;
   }
+  
   @media (max-width: 600px) {
     .product-item {
       width: 100%;

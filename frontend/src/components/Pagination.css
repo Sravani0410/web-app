@@ -1,3 +1,22 @@
-.pagination{
-    background-color: aqua;
-}
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .page-item {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    outline: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .page-item:hover {
+    background-color: #2980b9;
+  }

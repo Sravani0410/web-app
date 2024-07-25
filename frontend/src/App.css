@@ -72,6 +72,7 @@ nav .main-before-login .main-btn{
   color:#333;
   font-weight: 600;
   margin-top:10px;
+  color:#fff
  }
 /* nav .main-after-login{
   display: flex;
@@ -156,13 +157,13 @@ nav .main-before-login .main-btn{
   font-weight: 600;
 }
 
-.product-list{
+.product-list-container{
   /* width:100%; */
   /* display: flex; */
   /* flex-wrap: wrap; */
   /* padding: 0 20px; */
 }
 
-.product-list h1{
+.product-list-container h1{
    /* align-items: center; */
 }

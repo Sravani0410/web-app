@@ -4,13 +4,13 @@ const auth = require('../middleware/auth');
 const router = express.Router();
 
 // Get all products
-router.get('/', async (req, res) => {
+router.get('/', auth,async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 8;
 
   try {
     const count = await Product.countDocuments();
-    const products = await Product.find()
+    const products = await Product.find({ user: req.user.id })
       .skip((page - 1) * limit)
       .limit(limit);
 

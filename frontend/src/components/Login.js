@@ -9,7 +9,6 @@ const Login = () => {
   const { status, error } = useSelector((state) => state.auth);
   const [formData, setFormData] = useState({
     email: "",
-    username: "",
     password: "",
   });
 

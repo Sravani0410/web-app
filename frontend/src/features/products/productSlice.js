@@ -12,7 +12,12 @@ const initialState = {
 };
 
 export const fetchProducts = createAsyncThunk('products/fetchProducts', async ({page,limit}) => {
-  const response = await axios.get(`/api/products?page=${page}&limit=${limit}`);
+  // const token = getState().auth.token;
+  const response = await axios.get(`/api/products?page=${page}&limit=${limit}`,{
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
   return response.data;
 });
 

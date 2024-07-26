@@ -25,7 +25,7 @@ console.log("formData",formData)
     e.preventDefault();
     dispatch(registerUser(formData)).then(() => {
         navigate('/login');
-    });
+    }).catch(err => console.error('Registration error:', err));;
   };
   if (status === 'loading') {
     return  (

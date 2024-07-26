@@ -2,7 +2,7 @@ import React from 'react';
 import "./Pagination.css"
 
 const Pagination = ({ totalPages, currentPage, onPageChange }) => {
-  const pages = [...Array(totalPages).keys()].map((num) => num + 1);
+  const pages = [...Array(currentPage).keys()].map((num) => num + 1);
 
   return (
     <div className='pagination-container'>

@@ -25,7 +25,7 @@ const Login = () => {
     console.log("formData", formData);
     dispatch(loginUser(formData)).then(() => {
       navigate("/products");
-    });
+    }).catch(err => console.error('Login error:', err));
   };
   if (status === 'loading') {
     return  (

@@ -11,19 +11,26 @@ const initialState = {
 export const loginUser = createAsyncThunk('auth/loginUser', async (credentials) => {
   try {
     const response = await axios.post('/api/auth/login', credentials);
-    const { token, user } = response.data;
+    const { token } = response.data;
     localStorage.setItem('token', token);
-    return { token, user };
+    const userResponse = await axios.get('/api/auth/login', {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    return { token, user:userResponse.data };
   } catch (err) {
-    throw err;
+    throw err.response.data;
   }
 });
 
-export const registerUser = createAsyncThunk('auth/registerUser', async (userData) => {
-  const response = await axios.post('/api/auth/register', userData);
-  return response.data;
-});
 
+export const registerUser = createAsyncThunk('auth/registerUser', async (userData) => {
+  try {
+    const response = await axios.post('/api/auth/register', userData);
+    return response.data;
+  } catch (err) {
+    throw err.response.data;
+  }
+});
 // Create slice
 const authSlice = createSlice({
   name: 'auth',
@@ -43,6 +50,7 @@ const authSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.user = action.payload;
+        state.token = action.payload.token;
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.status = 'failed';
@@ -54,6 +62,7 @@ const authSlice = createSlice({
       .addCase(registerUser.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.user = action.payload;
+        state.token = action.payload.token;
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.status = 'failed';

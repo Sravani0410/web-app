@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../api/axios";
 const token = localStorage.getItem("token");
-
+console.log("token", token);
 const initialState = {
   products: [],
   product: null,
@@ -13,7 +13,8 @@ const initialState = {
 
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
-  async ({ page, limit }) => {
+  async ({ page, limit }, { getState }) => {
+    const token = getState().auth.token;
     try {
       const response = await axios.get(
         `/api/products?page=${page}&limit=${limit}`,
@@ -23,25 +24,35 @@ export const fetchProducts = createAsyncThunk(
           },
         }
       );
-      console.log("response", response);
       return response.data;
     } catch (error) {
       console.error("Error fetching products:", error);
+      throw error.response.data;
     }
   }
 );
 
 export const fetchProductById = createAsyncThunk(
   "products/fetchProductById",
-  async (id) => {
-    const response = await axios.get(`/api/products/${id}`);
-    return response.data;
+  async (id, { getState }) => {
+    const token = getState().auth.token;
+    try {
+      const response = await axios.get(`/api/products/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (err) {
+      console.error("Error fetching product:", err);
+      throw err.response.data;
+    }
   }
 );
 
 export const createProduct = createAsyncThunk(
   "products/createProduct",
-  async (product) => {
+  async (product, { getState }) => {
     try {
       const response = await axios.post("/api/products", product, {
         headers: {
@@ -51,13 +62,15 @@ export const createProduct = createAsyncThunk(
       return response.data;
     } catch (error) {
       console.error("Error creating product:", error);
+      throw error.response.data;
     }
   }
 );
 
 export const editProduct = createAsyncThunk(
   "products/editProduct",
-  async (product) => {
+  async (product, { getState }) => {
+    const token = getState().auth.token;
     const { id, ...updatedProduct } = product;
     try {
       const response = await axios.put(`/api/products/${id}`, updatedProduct, {
@@ -67,7 +80,8 @@ export const editProduct = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
-      console.error("Error creating product:", error);
+      console.error("Error editing product:", error);
+      throw error.response.data;
     }
   }
 );

@@ -7,7 +7,7 @@ const initialState = {
   product: null,
   status: "idle",
   error: null,
-  totalPages: 1,
+  totalPages:0,
   currentPage: 1,
 };
 

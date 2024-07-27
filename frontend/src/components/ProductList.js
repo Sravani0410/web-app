@@ -15,11 +15,11 @@ const ProductList = () => {
   const localstoragetoken = localStorage.getItem("token");
   useEffect(() => {
     if (status === "idle") {
-      dispatch(fetchProducts({ page: currentPage, limit: 8 }));
+      dispatch(fetchProducts({ page: currentPage, limit: 4 }));
     }
-  }, [status, dispatch]);
+  }, [status, dispatch,currentPage]);
   const handlePageChange = (page) => {
-    dispatch(fetchProducts({ page, limit: 8 }));
+    dispatch(fetchProducts({ page, limit: 4 }));
   };
   if (status === 'loading') {
     return  (
@@ -40,6 +40,7 @@ const ProductList = () => {
       <div className="product-list-container">
         {/* <h1>Product List</h1> */}
         {localstoragetoken && (
+          <>
           <div className="product-container">
             <div className="product-list-container">
               <ul className="product-list">
@@ -66,8 +67,9 @@ const ProductList = () => {
               </ul>
             </div>
           </div>
+          <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />
+          </>
         )}
-         <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />
       </div>
     </>
   );

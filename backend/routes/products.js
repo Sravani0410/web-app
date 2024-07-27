@@ -6,9 +6,9 @@ const router = express.Router();
 // Get all products
 router.get('/',auth, async (req, res) => {
   const page = parseInt(req.query.page) || 1;
-  const limit = parseInt(req.query.limit) || 8;
+  const limit = parseInt(req.query.limit) || 4;
   try {
-    const count = await Product.countDocuments();
+    const count = await Product.countDocuments({"userId":req.user.user.id});
     const products = await Product.find({"userId":req.user.user.id})
       .skip((page - 1) * limit)
       .limit(limit);

@@ -53,6 +53,7 @@ export const fetchProductById = createAsyncThunk(
 export const createProduct = createAsyncThunk(
   "products/createProduct",
   async (product, { getState }) => {
+    const token = getState().auth.token;
     try {
       const response = await axios.post("/api/products", product, {
         headers: {

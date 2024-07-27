@@ -40,7 +40,7 @@ const CreateEditProduct = () => {
     if (id) {
       dispatch(editProduct({ ...formData, id }));
     } else {
-      console.log("formData", formData);
+      // console.log("formData", formData);
       dispatch(createProduct(formData));
     }
     navigate("/products");

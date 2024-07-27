@@ -25,10 +25,10 @@ const ProductDetail = () => {
         product && (
           <>
             <div className="product-detail-container">
-              <h1>View Details Page</h1>
-              <h1>{product.name}</h1>
-              <p>{product.price}</p>
-              <p>{product.description}</p>
+              <h1 className="product-detail-title">View Details Page</h1>
+              <p><b>Product Name: </b>{product.name}</p>
+              <p><b>Price: </b>₹{product.price}</p>
+              <p><b>Product Description: </b>{product.description}</p>
               <Link to="/products" className="back-link">
                 Back to List
               </Link>

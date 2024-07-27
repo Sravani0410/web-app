@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
+import "./form.css"
 
 const Login = () => {
   const dispatch = useDispatch();

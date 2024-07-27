@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../api/axios";
 const token = localStorage.getItem("token");
-console.log("token", token);
+// console.log("token", token);
 const initialState = {
   products: [],
   product: null,

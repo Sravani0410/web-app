@@ -33,7 +33,7 @@ const ProductList = () => {
   if (status === 'failed') {
     return <div>Error: {error}</div>;
   }
-  console.log("products",products)
+  // console.log("products",products)
   return (
     <>
       <Navbar />
@@ -44,7 +44,7 @@ const ProductList = () => {
           <div className="product-container">
             <div className="product-list-container">
               <ul className="product-list">
-                {products?.map((product) => (
+                {products.length>0?products?.map((product) => (
                   <li key={product.id} className="product-item">
                     <img
                   className="product-image"
@@ -54,7 +54,7 @@ const ProductList = () => {
                    <div className="product-details">
                   <h2 className="product-name">{product.name}</h2>
                 </div>
-                <p className="product-price">Price: ${product.price}</p>
+                <p className="product-price">Price: ₹ {product.price}</p>
                 <p className="product-description">{product.description}</p>
                   <div className="product-links">
                   <Link to={`/products/${product._id}`} className="view-details">
@@ -63,7 +63,7 @@ const ProductList = () => {
                   <Link to={`/edit/${product._id}`} className="edit">Edit Details</Link>
                 </div>
                   </li>
-                ))}
+                )):<h1>Create Order</h1>}
               </ul>
             </div>
           </div>

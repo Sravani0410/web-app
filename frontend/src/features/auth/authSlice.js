@@ -8,27 +8,41 @@ const initialState = {
   error: null,
 };
 
-export const loginUser = createAsyncThunk('auth/loginUser', async (credentials) => {
-  try {
-    const response = await axios.post('/api/auth/login', credentials);
-    const { token } = response.data;
-    localStorage.setItem('token', token);
-    const userResponse = await axios.get('/api/auth/login', {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    return { token, user:userResponse.data };
-  } catch (err) {
-    throw err.response.data;
-  }
-});
+export const loginUser = createAsyncThunk(
+  'auth/loginUser',
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const response = await axios.post('/api/auth/login', credentials);
+      const { token } = response.data;
+      localStorage.setItem('token', token);
 
+      // const userResponse = await axios.get('/api/auth/login', {
+      //   headers: { Authorization: `Bearer ${token}` }
+      // });
+      // if(userResponse){
+      //   localStorage.setItem('token', token);
+      // }
+      // return { token, user: userResponse.data };
+      return { token };
+
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
 
 export const registerUser = createAsyncThunk('auth/registerUser', async (userData) => {
   try {
     const response = await axios.post('/api/auth/register', userData);
+    console.log('Register response:', response);
     return response.data;
   } catch (err) {
-    throw err.response.data;
+    console.error('Register error:', err);
+    if (err.response) {
+      console.error('Error response:', err.response);
+      console.error('Error response data:', err.response.data);
+    }
+    throw err.response ? err.response.data : err;
   }
 });
 // Create slice
@@ -54,7 +68,7 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.error.message;
+        state.error = action.payload || action.error.message;
       })
       .addCase(registerUser.pending, (state) => {
         state.status = 'loading';
@@ -66,7 +80,7 @@ const authSlice = createSlice({
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.error.message;
+        state.error = action.payload || action.error.message;
       });
   },
 });

@@ -20,13 +20,17 @@ const Register = () => {
       [name]: value,
     }));
   };
-console.log("formData",formData)
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(registerUser(formData)).then(() => {
+    dispatch(registerUser(formData)).unwrap()
+      .then(() => {
         navigate('/login');
-    }).catch(err => console.error('Registration error:', err));;
+      })
+      .catch((err) => {
+        console.error('Registration error:', err);
+      });
   };
+
   if (status === 'loading') {
     return  (
       <div className="loading-container">
@@ -35,9 +39,9 @@ console.log("formData",formData)
       </div>
     );
   }
-  if (status === 'failed') {
-    return <div>Error: {error}</div>;
-  }
+  // if (status === 'failed') {
+  //   return <div>Error: {error}</div>;
+  // }
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit}>
@@ -76,6 +80,7 @@ console.log("formData",formData)
           <i class="fa-solid fa-lock"></i>
         </div>
         <button className='btn' type="submit">Register</button>
+        {status === 'failed' && <div style={{ color: 'red' }}>Error: {error}</div>}
       </form>
     </div>
   );

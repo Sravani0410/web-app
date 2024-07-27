@@ -22,11 +22,15 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("formData", formData);
-    dispatch(loginUser(formData)).then(() => {
-      navigate("/products");
-    }).catch(err => console.error('Login error:', err));
+    dispatch(loginUser(formData)).unwrap()
+      .then(() => {
+        navigate("/products");
+      })
+      .catch((err) => {
+        console.error('Login error:', err);
+      });
   };
+
   if (status === 'loading') {
     return  (
       <div className="loading-container">
@@ -35,9 +39,9 @@ const Login = () => {
       </div>
     );
   }
-  if (status === 'failed') {
-    return <div>Error: {error}</div>;
-  }
+  // if (status === 'failed') {
+  //   return <div style={{ color: 'red' }}>Error: {error}</div>;
+  // }
 
   return (
     <div className="form-container">
@@ -70,6 +74,7 @@ const Login = () => {
         <button className="btn" type="submit">
           Login
         </button>
+        {status === 'failed' && <div style={{ color: 'red' }}>Error: {error}</div>}
       </form>
     </div>
   );
